@@ -1,0 +1,17 @@
+---
+// Si en el futuro se añade analítica (Google Analytics, etc.), actualizar esta página y añadir un banner de consentimiento
+import LegalPage from "../components/LegalPage.astro";
+import { SITE } from "../data/site";
+---
+
+<LegalPage title="Política de cookies" description="Información sobre el uso de cookies en el sitio web de TraceIT." updated="25 de septiembre de 2026">
+  <h2>¿Usamos cookies?</h2>
+  <p>No. Este sitio web no instala cookies propias ni de terceros, ni utiliza herramientas de analítica, publicidad o seguimiento. Por eso no te mostramos ningún aviso de cookies.</p>
+
+  <h2>¿Qué recursos externos cargamos?</h2>
+  <p>Ninguno que te identifique. Las tipografías, imágenes y scripts se sirven desde nuestro propio servidor. Solo cuando envías el formulario de contacto, sus datos se transmiten al servicio de envío de formularios, tal como se explica en la <a href="/privacidad/">política de privacidad</a>.</p>
+
+  <h2>Cambios en esta política</h2>
+  <p>Si en el futuro incorporamos cookies o herramientas de analítica, actualizaremos esta página y te pediremos tu consentimiento antes de instalar cualquier cookie que no sea técnica.</p>
+  <p>Para cualquier duda, escríbenos a <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+</LegalPage>

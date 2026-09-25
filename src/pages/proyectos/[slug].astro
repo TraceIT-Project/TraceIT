@@ -1,0 +1,93 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import Icon from "../../components/Icon.astro";
+import { PROJECT_CATEGORIES } from "../../data/site";
+
+export async function getStaticPaths() {
+  const all = (await getCollection("proyectos")).sort((a, b) => a.data.order - b.data.order);
+  return all.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, others: [all[(i + 1) % all.length], all[(i + 2) % all.length]] },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"proyectos">;
+  others: CollectionEntry<"proyectos">[];
+}
+
+const { project, others } = Astro.props;
+const p = project.data;
+const { Content } = await render(project);
+const types = p.categories.map((c) => PROJECT_CATEGORIES[c]).join(" · ");
+---
+
+<Base title={`${p.title} · Proyectos · TraceIT`} description={p.summary} active="proyectos">
+  <PageHero eyebrow={p.sector} title={p.title} lead={p.summary} overlap>
+    <nav class="crumbs" aria-label="Ruta de navegación" slot="before">
+      <a href="/">Inicio</a><span aria-hidden="true">/</span><a href="/proyectos/">Proyectos</a><span aria-hidden="true">/</span><span aria-current="page">{p.sector}</span>
+    </nav>
+    <ul class="chips">{p.tags.map((t) => <li class="chip">{t}</li>)}</ul>
+  </PageHero>
+
+  <div class="container overlap-photo" data-reveal="clip">
+    <div class="overlap-photo__frame">
+      <Image src={p.cover} alt={p.coverAlt} width={1800} height={771} widths={[480, 720, 960, 1400, 1800]} sizes="(max-width: 1340px) calc(100vw - 40px), 1240px" quality={72} priority />
+    </div>
+  </div>
+
+  <section class="section" aria-label="Detalle del proyecto">
+    <div class="container case">
+      <div>
+        <div class="case__block" data-reveal>
+          <h2>El reto</h2>
+          <p>{p.challenge}</p>
+        </div>
+        <div class="case__block" data-reveal>
+          <h2>La solución</h2>
+          <p>{p.solution}</p>
+        </div>
+        <div class="case__block case__body" data-reveal>
+          <Content />
+        </div>
+        <div class="case__block" data-reveal>
+          <h2>Resultados</h2>
+          <div class="case__results">
+            {p.results.map((r) => <div class="result"><strong>{r.value}</strong><span>{r.label}</span></div>)}
+          </div>
+        </div>
+      </div>
+
+      <aside class="case__aside" data-reveal>
+        <div class="facts">
+          <h2>Ficha del proyecto</h2>
+          <dl>
+            <div><dt>Sector</dt><dd>{p.sector}</dd></div>
+            <div><dt>Tipo de proyecto</dt><dd>{types}</dd></div>
+            {p.duration && <div><dt>Duración</dt><dd>{p.duration}</dd></div>}
+            <div><dt>Tecnologías</dt><dd><ul class="chips">{p.stack.map((s) => <li class="chip">{s}</li>)}</ul></dd></div>
+          </dl>
+          <a class="btn btn--dark" href="/contacto/">¿Algo parecido? Hablemos <Icon name="arrow-right" /></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="otros-title">
+    <div class="container">
+      <div class="sec-head sec-head--split" data-reveal>
+        <h2 class="h2" id="otros-title">Otros proyectos</h2>
+        <div class="sec-head__side">
+          <a class="link-arrow" href="/proyectos/">Ver todos los proyectos <Icon name="arrow-right" /></a>
+        </div>
+      </div>
+      <div class="proj-grid">
+        {others.map((o, i) => <ProjectCard project={o} index={i} heading="h3" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1340px) 48vw, 610px" />)}
+      </div>
+    </div>
+  </section>
+</Base>

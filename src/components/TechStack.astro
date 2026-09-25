@@ -1,0 +1,39 @@
+---
+// Tecnologías como baldosas con el color oficial de cada marca.
+// Se editan en src/data/site.ts (TECH).
+import Icon from "./Icon.astro";
+import { TECH } from "../data/site";
+
+const groups = [
+  { title: "Frontend", items: TECH.frontend },
+  { title: "Backend", items: TECH.backend },
+  { title: "Datos", items: TECH.datos },
+  { title: "Cloud y DevOps", items: TECH.cloud },
+];
+const items = groups.flatMap((g) => g.items.map((t) => ({ ...t, group: g.title })));
+// Si la última fila (3 columnas) queda incompleta, se completa con una baldosa de contacto
+const showMore = items.length % 3 !== 0;
+---
+
+<ul class="tech-tiles">
+  {items.map((t, i) => (
+    <li class="tech-tile" data-reveal style={`--c:${t.color};--i:${Math.floor(i / 3)}`}>
+      <span class="tech-tile__logo"><Icon name={t.icon} brand={t.brand} /></span>
+      <span class="tech-tile__text">
+        <span class="tech-tile__name">{t.name}</span>
+        <span class="tech-tile__cat">{t.group}</span>
+      </span>
+    </li>
+  ))}
+  {showMore && (
+    <li class="tech-tile tech-tile--more" data-reveal style={`--i:${Math.floor(items.length / 3)}`}>
+      <a href="/contacto/">
+        <span class="tech-tile__logo"><Icon name="plus" /></span>
+        <span class="tech-tile__text">
+          <span class="tech-tile__name">¿Otra tecnología?</span>
+          <span class="tech-tile__cat">Pregúntanos</span>
+        </span>
+      </a>
+    </li>
+  )}
+</ul>

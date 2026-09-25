@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import TraceMark from "../components/TraceMark.astro";
+---
+
+<Base title="Página no encontrada · TraceIT" description="La página que buscas no existe o ha cambiado de dirección." cta={false} noindex>
+  <section class="page-hero on-dark error-page" aria-labelledby="page-title">
+    <div class="bg-glow"></div><div class="bg-grid"></div>
+    <TraceMark />
+    <div class="container">
+      <p class="eyebrow" data-intro style="--i:0">Error 404</p>
+      <h1 id="page-title" data-intro style="--i:1">Esta ruta no está trazada</h1>
+      <p class="lead" data-intro style="--i:2">La página que buscas no existe o ha cambiado de dirección. Te ayudamos a volver al camino.</p>
+      <div class="hero__actions" data-intro style="--i:3">
+        <a class="btn btn--primary" href="/">Ir al inicio <Icon name="arrow-right" /></a>
+        <a class="btn btn--ghost" href="/contacto/">Contactar</a>
+      </div>
+    </div>
+  </section>
+</Base>

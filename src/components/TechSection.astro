@@ -1,0 +1,34 @@
+---
+// Sección completa de tecnologías (portada y servicios).
+import Icon from "./Icon.astro";
+import TechStack from "./TechStack.astro";
+
+interface Props {
+  /** Número de sección en la portada, p. ej. "05" */
+  num?: string;
+  soft?: boolean;
+}
+const { num, soft = false } = Astro.props;
+
+const principles = [
+  ["shield-check", "Tecnologías consolidadas", "Herramientas maduras, con soporte a largo plazo y una gran comunidad detrás."],
+  ["puzzle", "Elegidas para tu caso", "Partimos de tus sistemas actuales y elegimos lo que mejor encaja con ellos."],
+  ["file-text", "Sin ataduras", "Código documentado y estándar: cualquier equipo podrá mantenerlo."],
+];
+---
+
+<section class:list={["section", { "section--soft": soft }]} id="tecnologias" aria-labelledby="tecnologias-title">
+  <div class="container tech-layout">
+    <div class="sticky-head" data-reveal>
+      <p class="eyebrow">{num && <span class="num">{num}</span>} Tecnologías</p>
+      <h2 class="h2" id="tecnologias-title">Tecnología estándar, sin ataduras</h2>
+      <p class="lead">Trabajamos con las tecnologías más consolidadas del mercado para que tu software sea fiable hoy y fácil de mantener mañana.</p>
+      <ul class="principles">
+        {principles.map(([icon, title, text]) => (
+          <li><span class="icon-box"><Icon name={icon} /></span><div><strong>{title}</strong><p>{text}</p></div></li>
+        ))}
+      </ul>
+    </div>
+    <TechStack />
+  </div>
+</section>

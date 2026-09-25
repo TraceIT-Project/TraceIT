@@ -1,0 +1,25 @@
+---
+import Icon from "./Icon.astro";
+import TraceMark from "./TraceMark.astro";
+import { SITE, PHONE_TEXT } from "../data/site";
+---
+
+<section class="section cta-section" aria-labelledby="cta-title">
+  <div class="container">
+    <div class="cta-panel on-dark" data-reveal>
+      <div class="bg-glow"></div><div class="bg-grid"></div>
+      <TraceMark />
+      <div>
+        <p class="eyebrow">Hablemos</p>
+        <h2 class="h2" id="cta-title">¿Tienes un proceso que podría funcionar mejor?</h2>
+        <p class="lead">Cuéntanoslo. La primera reunión es gratuita y sin compromiso, y tendrás respuesta en menos de 24 horas.</p>
+        <div class="hero__actions"><a class="btn btn--primary" href="/contacto/">Cuéntanos tu proyecto <Icon name="arrow-right" /></a></div>
+      </div>
+      <div class="contact-list">
+        <a class="contact-item" href={`mailto:${SITE.email}`}><span class="icon-box"><Icon name="mail" /></span><span><small>Escríbenos</small><b>{SITE.email}</b></span></a>
+        <a class="contact-item" href={`tel:${SITE.phoneHref}`}><span class="icon-box"><Icon name="phone" /></span><span><small>Llámanos</small><b>{PHONE_TEXT}</b></span></a>
+        <div class="contact-item"><span class="icon-box"><Icon name="map-pin" /></span><span><small>Dónde estamos</small><b>Málaga · En remoto en España y Latinoamérica</b></span></div>
+      </div>
+    </div>
+  </div>
+</section>

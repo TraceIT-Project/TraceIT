@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import Icon from "./Icon.astro";
+
+interface Props {
+  project: CollectionEntry<"proyectos">;
+  sizes: string;
+  index?: number;
+  desc?: boolean;
+  heading?: "h2" | "h3";
+  /** Proporción del recorte de la imagen [ancho, alto] */
+  ratio?: [number, number];
+  /** Imagen visible al cargar: sin carga diferida y con prioridad */
+  priority?: boolean;
+}
+
+const { project, sizes, index = 0, desc = true, heading = "h3", ratio = [16, 10], priority = false } = Astro.props;
+const width = 1400;
+const height = Math.round((width * ratio[1]) / ratio[0]);
+const p = project.data;
+const Heading = heading;
+---
+
+<article class="proj" data-reveal style={`--i:${index}`} data-cat={p.categories.join(" ")}>
+  <div class="proj__media" data-reveal="clip">
+    <Image src={p.cover} alt={p.coverAlt} width={width} height={height} widths={[480, 720, 960, 1400]} sizes={sizes} quality={72} priority={priority} />
+    <div class="proj__tags">{p.tags.map((t) => <span class="tag-glass">{t}</span>)}</div>
+    <span class="proj__go"><Icon name="arrow-up-right" /></span>
+    <div class="corners"><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="proj__body">
+    <p class="proj__sector">{p.sector}</p>
+    <Heading><a href={`/proyectos/${project.id}/`}>{p.title}</a></Heading>
+    {desc && <p class="proj__desc">{p.summary}</p>}
+    <div class="proj__metrics">
+      {p.metrics.map((m) => <div><strong>{m.value}</strong><span>{m.label}</span></div>)}
+    </div>
+  </div>
+</article>

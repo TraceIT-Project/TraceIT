@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import equipo from "../assets/photos/equipo-postits.jpg";
+
+const values = [
+  ["messages-square", "Claridad", "Hablamos tu idioma, sin tecnicismos ni letra pequeña. Siempre sabes en qué punto está tu proyecto."],
+  ["handshake", "Honestidad", "Si algo no tiene sentido para tu negocio, te lo decimos, aunque no nos convenga."],
+  ["shield-check", "Calidad", "Código limpio, probado y documentado, pensado para durar y para que cualquiera pueda mantenerlo."],
+  ["life-buoy", "Compromiso", "Nos implicamos en tu proyecto antes, durante y después de la entrega."],
+];
+
+const commitments = [
+  ["key-round", "El código es tuyo", "Código fuente, documentación y accesos al terminar."],
+  ["receipt", "Presupuesto cerrado por fases", "Sabes qué pagas y qué recibes en cada entrega."],
+  ["repeat", "Entregas a tu medida", "Acordamos contigo el ritmo y ves el avance desde el principio."],
+  ["clock", "Respuesta en menos de 24 h", "La primera reunión es gratuita y sin compromiso."],
+];
+---
+
+<Base
+  title="Nosotros · TraceIT, desarrollo de software a medida en Málaga"
+  description="Somos TraceIT, un equipo de desarrollo de software a medida en Málaga. Construimos herramientas claras, útiles y fáciles de mantener para empresas de España y Latinoamérica."
+  active="nosotros"
+>
+  <PageHero
+    eyebrow="Nosotros"
+    title="Construimos software que da gusto usar"
+    lead="Somos un equipo de desarrollo de software en Málaga. Ayudamos a empresas de España y Latinoamérica a trabajar mejor con herramientas hechas a su medida: claras, útiles y fáciles de mantener."
+    overlap
+  />
+  <div class="container overlap-photo" data-reveal="clip">
+    <div class="overlap-photo__frame">
+      <Image src={equipo} alt="Equipo planificando un proyecto con notas adhesivas en una pared de cristal" width={1800} height={771} widths={[480, 720, 960, 1400, 1800]} sizes="(max-width: 1340px) calc(100vw - 40px), 1240px" quality={72} priority />
+    </div>
+  </div>
+
+  <!-- Texto propuesto: revisar y ajustar a vuestra historia real -->
+  <section class="section" aria-labelledby="mision-title">
+    <div class="container story">
+      <div class="sticky-head" data-reveal>
+        <p class="eyebrow">Nuestra misión</p>
+        <h2 class="h2" id="mision-title">Que la tecnología se adapte a tu empresa, y no al revés</h2>
+      </div>
+      <div>
+        <div class="story__body" data-reveal>
+          <p>Muchas empresas acaban adaptando su forma de trabajar a programas que no encajan con ellas: hojas de cálculo que crecen sin control, herramientas que no se hablan entre sí y procesos que dependen de copiar y pegar.</p>
+          <p>En TraceIT hacemos lo contrario. Escuchamos cómo trabaja cada empresa, trazamos un plan claro y construimos el software que necesita, ni más ni menos. Sin tecnicismos innecesarios, con presupuestos cerrados y entregas que puedes ver y probar desde el principio.</p>
+          <p>Y cuando el software ya funciona, seguimos a tu lado para mantenerlo y hacerlo crecer.</p>
+        </div>
+        <h3 class="name-title" data-reveal>Por qué nos llamamos TraceIT</h3>
+        <div class="name-card" data-stagger>
+          <div class="name-card__item"><b>Trace</b><p>Trazamos el camino: analizamos, planificamos y diseñamos antes de construir.</p></div>
+          <div class="name-card__item"><b>Trazabilidad</b><p>Cada decisión, cada cambio y cada entrega quedan documentados y a tu alcance.</p></div>
+          <div class="name-card__item"><b><span>IT</span></b><p>Tecnología al servicio de tu negocio. Es nuestro oficio.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-dark" aria-labelledby="valores-title">
+    <div class="container">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Cómo somos</p>
+        <h2 class="h2" id="valores-title">Lo que nos define</h2>
+      </div>
+      <div class="values" data-stagger>
+        {values.map(([icon, title, text]) => (
+          <div class="value"><span class="icon-box"><Icon name={icon} /></span><h3>{title}</h3><p>{text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="compromisos-title">
+    <div class="container">
+      <div class="sec-head sec-head--split" data-reveal>
+        <p class="eyebrow">Nuestros compromisos</p>
+        <h2 class="h2" id="compromisos-title">Lo que puedes esperar de nosotros</h2>
+        <div class="sec-head__side">
+          <p class="lead">Las mismas reglas en cada proyecto, sea grande o pequeño.</p>
+          <a class="link-arrow" href="/como-trabajamos/">Ver cómo trabajamos <Icon name="arrow-right" /></a>
+        </div>
+      </div>
+      <div class="bento" data-stagger>
+        {commitments.map(([icon, title, text]) => (
+          <article class="card span-3 spot commitment">
+            <span class="icon-box"><Icon name={icon} /></span>
+            <div><h3>{title}</h3><p>{text}</p></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

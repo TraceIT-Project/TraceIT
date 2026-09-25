@@ -1,0 +1,216 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import TechSection from "../components/TechSection.astro";
+import codigo from "../assets/photos/codigo-portatil.jpg";
+import appMovil from "../assets/photos/app-movil.jpg";
+import equipoMesa from "../assets/photos/equipo-mesa.jpg";
+import revision from "../assets/photos/revision-codigo.jpg";
+import bocetos from "../assets/photos/bocetos-ux.jpg";
+
+type Service = {
+  id: string;
+  title: string;
+  text: string;
+  checklist: string[];
+  ideal: string;
+  photo?: { src: ImageMetadata; alt: string };
+  viz?: "dashboard" | "flow" | "status";
+};
+
+const services: Service[] = [
+  {
+    id: "aplicaciones-web",
+    title: "Aplicaciones web a medida",
+    text: "Herramientas de gestión, portales para clientes o proveedores y plataformas internas construidas alrededor de cómo trabaja tu empresa. Funcionan en cualquier navegador y dispositivo, sin instalaciones.",
+    checklist: ["Análisis de procesos y diseño de la experiencia de uso", "Perfiles de usuario, permisos y control de accesos", "Diseño adaptado a ordenador, tablet y móvil", "Integración con tus sistemas actuales"],
+    ideal: "tu equipo trabaja con hojas de cálculo, correos y papel para algo que debería estar en un único sistema.",
+    photo: { src: codigo, alt: "Portátil con código fuente en pantalla sobre una mesa" },
+  },
+  {
+    id: "apps-moviles",
+    title: "Apps móviles",
+    text: "Aplicaciones para iOS y Android que acompañan a tu equipo o a tus clientes allí donde estén, conectadas con tu software y tus datos.",
+    checklist: ["Apps para iOS y Android", "Diseño pensado para el uso diario", "Conexión con tu software y tus datos", "Publicación en App Store y Google Play"],
+    ideal: "tu equipo trabaja fuera de la oficina o quieres ofrecer a tus clientes una app propia.",
+    photo: { src: appMovil, alt: "Mano sosteniendo un móvil con una aplicación de gráficas delante de un escritorio" },
+  },
+  {
+    id: "intranets",
+    title: "Intranets y portales de empleado",
+    text: "Un espacio único para la comunicación interna, los documentos y los procesos del día a día de tu equipo.",
+    checklist: ["Comunicados, noticias y directorio de empleados", "Gestor documental con permisos por área", "Solicitudes y aprobaciones: vacaciones, gastos, compras", "Acceso seguro desde la oficina o en remoto"],
+    ideal: "la información importante se pierde entre correos, carpetas compartidas y grupos de mensajería.",
+    photo: { src: equipoMesa, alt: "Equipo trabajando con portátiles alrededor de una mesa" },
+  },
+  {
+    id: "dashboards",
+    title: "Dashboards y cuadros de mando",
+    text: "Convertimos tus datos en indicadores claros y actualizados para que tomes decisiones con información fiable, no con intuiciones.",
+    checklist: ["Conexión con ERP, CRM, bases de datos y Excel", "Indicadores a medida para dirección, ventas u operaciones", "Actualización automática y alertas", "Desarrollo propio o con Power BI"],
+    ideal: "preparar un informe os lleva horas y cada departamento tiene sus propias cifras.",
+    viz: "dashboard",
+  },
+  {
+    id: "integraciones",
+    title: "Integraciones y automatización",
+    text: "Conectamos las herramientas que ya usas para que la información fluya sola entre ellas, y automatizamos las tareas repetitivas.",
+    checklist: ["Integraciones por API entre ERP, CRM, tienda online y facturación", "Sincronización automática de datos", "Automatización de tareas y documentos", "Avisos y registro de cada proceso"],
+    ideal: "alguien de tu equipo dedica horas cada semana a copiar datos de un programa a otro.",
+    viz: "flow",
+  },
+  {
+    id: "modernizacion",
+    title: "Modernización de software",
+    text: "Evolucionamos ese programa antiguo del que depende tu negocio, o lo sustituimos por partes, sin parar tu actividad.",
+    checklist: ["Auditoría del software y del código actual", "Plan de migración por fases", "Migración de datos", "Convivencia del sistema antiguo y el nuevo durante la transición"],
+    ideal: "tu software funciona, pero es lento, inseguro o nadie sabe cómo cambiarlo.",
+    photo: { src: revision, alt: "Dos personas revisando código juntas frente a una pantalla" },
+  },
+  {
+    id: "consultoria",
+    title: "Consultoría, auditoría y prototipado",
+    text: "Antes de invertir en desarrollo, te ayudamos a decidir bien: analizamos tus procesos o el software que ya tienes, y validamos la solución con un prototipo.",
+    checklist: ["Análisis de procesos y requisitos", "Auditoría de software y código, con informe de riesgos", "Recomendación de arquitectura y tecnología", "Prototipo navegable y hoja de ruta por fases"],
+    ideal: "tienes clara la necesidad pero no cómo resolverla, o quieres saber en qué estado está tu software.",
+    photo: { src: bocetos, alt: "Bocetos de pantallas de una aplicación dibujados a mano" },
+  },
+  {
+    id: "mantenimiento",
+    title: "Mantenimiento y evolución",
+    text: "Tu software, siempre al día y en buenas manos. Nos ocupamos de que siga funcionando y de que crezca con tu empresa.",
+    checklist: ["Actualizaciones de seguridad", "Copias de seguridad", "Soporte ante incidencias", "Mejoras y nuevas funcionalidades, también con bolsa de horas mensual"],
+    ideal: "quieres olvidarte de la parte técnica y centrarte en tu negocio.",
+    viz: "status",
+  },
+];
+
+const models = [
+  { icon: "receipt", title: "Proyecto cerrado", text: "Alcance, plan por fases y precio cerrados desde el principio. Para desarrollos nuevos con objetivos claros.", items: ["Presupuesto cerrado por fases", "Entregas y demos al ritmo que elijas", "Código, documentación y accesos para ti"] },
+  { icon: "calendar-check", title: "Bolsa de horas mensual", text: "Un equipo técnico a tu disposición cada mes para mejorar, ampliar y mantener tu software de forma continua.", items: ["Horas mensuales según tus necesidades", "Mejoras y nuevas funcionalidades", "Mantenimiento, soporte y seguridad"] },
+  { icon: "scan-search", title: "Consultoría y auditoría", text: "Un análisis experto antes de decidir: de tu idea, de tus procesos o del software que ya usas.", items: ["Auditoría de software y código", "Informe de riesgos y recomendaciones", "Prototipo y hoja de ruta"] },
+];
+
+
+const uptime = Array.from({ length: 45 }, (_, i) => i === 27);
+const total = String(services.length).padStart(2, "0");
+---
+
+<Base
+  title="Servicios de desarrollo de software a medida · TraceIT"
+  description="Aplicaciones web y móviles, intranets, dashboards, integraciones, modernización de software, consultoría y mantenimiento. Software a medida para empresas de España y Latinoamérica."
+  active="servicios"
+>
+  <PageHero
+    full
+    eyebrow="Servicios"
+    title="Software a medida, de la idea a producción"
+    lead="Diseñamos, desarrollamos y mantenemos software para empresas. Podemos encargarnos de un proyecto completo o de una parte concreta: tú eliges por dónde empezar."
+  >
+    <ul class="chips">
+      {services.map((s) => <li><a class="chip" href={`#${s.id}`}>{s.title}</a></li>)}
+    </ul>
+  </PageHero>
+
+  <section class="section" id="contenido" aria-label="Detalle de servicios">
+    <div class="container svc-list">
+      {services.map((s, i) => (
+        <article class="svc" id={s.id}>
+          {s.photo ? (
+            <div class="svc__media" data-reveal="clip">
+              <Image src={s.photo.src} alt={s.photo.alt} widths={[640, 960, 1400]} sizes="(max-width: 960px) calc(100vw - 40px), (max-width: 1340px) 46vw, 580px" quality={72} />
+            </div>
+          ) : (
+            <div class="svc__media svc__media--viz on-dark" data-reveal="clip" aria-hidden="true">
+              <div class="bg-glow"></div><div class="bg-grid"></div>
+              {s.viz === "dashboard" && (
+                <div class="glass-panel">
+                  <div class="mock__head"><strong>Ventas por zona</strong><span>Últimos 30 días</span></div>
+                  <div class="mock__kpis" style="margin-top:12px">
+                    <div class="kpi"><small>Facturación</small><b>482 k€</b><em>▲ 8,2 %</em></div>
+                    <div class="kpi"><small>Margen</small><b>31,4 %</b><em>▲ 1,6 pts</em></div>
+                    <div class="kpi"><small>Pedidos</small><b>3.918</b><em>▲ 5,1 %</em></div>
+                  </div>
+                  <div class="mock__chart">
+                    <div class="mock__chart-head"><span>Evolución mensual</span><span class="mock__legend"><span><i></i>Este año</span><span><i></i>Anterior</span></span></div>
+                    <svg viewBox="0 0 300 110" preserveAspectRatio="none">
+                      <path class="chart-grid" d="M0 27.5H300M0 55H300M0 82.5H300"></path>
+                      <path class="chart-prev" d="M0 84 C30 80 50 78 75 74 S120 70 150 64 S200 60 225 55 S270 50 300 47"></path>
+                      <path class="chart-line" pathLength="1" d="M0 90 C30 82 50 70 75 66 S120 58 150 48 S200 40 225 30 S270 20 300 12"></path>
+                    </svg>
+                  </div>
+                </div>
+              )}
+              {s.viz === "flow" && (
+                <div class="glass-panel">
+                  <div class="viz-flow">
+                    <svg viewBox="0 0 300 190">
+                      <path class="wire" d="M62 25C92 25 92 95 122 95M62 95H122M62 165C92 165 92 95 122 95M178 95C196 95 196 40 214 40M178 95C196 95 196 150 214 150"></path>
+                      <path class="pulse" pathLength="100" d="M62 25C92 25 92 95 122 95"></path>
+                      <path class="pulse" pathLength="100" d="M62 165C92 165 92 95 122 95"></path>
+                      <path class="pulse" pathLength="100" d="M178 95C196 95 196 150 214 150"></path>
+                      <g class="node"><rect x="6" y="12" width="56" height="26" rx="7"></rect><text x="34" y="29">ERP</text></g>
+                      <g class="node"><rect x="6" y="82" width="56" height="26" rx="7"></rect><text x="34" y="99">CRM</text></g>
+                      <g class="node"><rect x="6" y="152" width="56" height="26" rx="7"></rect><text x="34" y="169">Excel</text></g>
+                      <g class="hub"><rect x="122" y="77" width="56" height="36" rx="10"></rect><image href="/img/simbolo-light.svg" x="136" y="84" width="28" height="22"></image></g>
+                      <g class="node"><rect x="214" y="27" width="80" height="26" rx="7"></rect><text x="254" y="44">Facturación</text></g>
+                      <g class="node"><rect x="214" y="137" width="80" height="26" rx="7"></rect><text x="254" y="154">Tienda online</text></g>
+                    </svg>
+                  </div>
+                </div>
+              )}
+              {s.viz === "status" && (
+                <div class="glass-panel">
+                  <div class="viz-status">
+                    <div class="viz-status__head"><span>Todos los sistemas operativos</span><small>Últimos 90 días</small></div>
+                    <div class="uptime">{uptime.map((warn) => <i class={warn ? "warn" : undefined}></i>)}</div>
+                    <ul class="viz-status__list">
+                      <li><Icon name="shield-check" /> Actualizaciones de seguridad</li>
+                      <li><Icon name="database" /> Copias de seguridad</li>
+                      <li><Icon name="life-buoy" /> Soporte y mejoras</li>
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+          <div class="svc__content" data-reveal>
+            <p class="svc__num">{String(i + 1).padStart(2, "0")} / {total}</p>
+            <h2>{s.title}</h2>
+            <p>{s.text}</p>
+            <ul class="checklist">
+              {s.checklist.map((item) => <li><Icon name="check" /> {item}</li>)}
+            </ul>
+            <div class="note"><Icon name="sparkle" /><p><strong>Ideal si…</strong> {s.ideal}</p></div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="modelos-title">
+    <div class="container">
+      <div class="sec-head" data-reveal>
+        <p class="eyebrow">Formas de colaborar</p>
+        <h2 class="h2" id="modelos-title">Elige cómo trabajamos juntos</h2>
+        <p class="lead">Nos adaptamos al momento de tu proyecto: desde un análisis previo hasta un equipo técnico que te acompaña cada mes.</p>
+      </div>
+      <div class="models" data-stagger>
+        {models.map((m) => (
+          <article class="card model spot">
+            <span class="icon-box"><Icon name={m.icon} /></span>
+            <h3>{m.title}</h3>
+            <p>{m.text}</p>
+            <ul class="checklist">
+              {m.items.map((item) => <li><Icon name="check" /> {item}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TechSection />
+</Base>

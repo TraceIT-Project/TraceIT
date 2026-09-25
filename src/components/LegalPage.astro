@@ -1,0 +1,23 @@
+---
+// Plantilla común de las páginas legales.
+import Base from "../layouts/Base.astro";
+import PageHero from "./PageHero.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  updated: string;
+}
+const { title, description, updated } = Astro.props;
+---
+
+<Base title={`${title} · TraceIT`} description={description} cta={false}>
+  <PageHero eyebrow="Legal" title={title} lead={`Última actualización: ${updated}`} />
+  <section class="section section--tight-top">
+    <div class="container">
+      <div class="prose" data-reveal>
+        <slot />
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,20 @@
+{
+  "name": "traceit-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Web corporativa de TraceIT — desarrollo de software a medida",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.5"
+  }
+}

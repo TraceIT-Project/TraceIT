@@ -1,0 +1,32 @@
+---
+// Cabecera oscura de las páginas interiores.
+import TraceMark from "./TraceMark.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  lead?: string;
+  overlap?: boolean;
+  /** Ocupa toda la pantalla; la siguiente sección debe tener id="contenido" */
+  full?: boolean;
+}
+const { eyebrow, title, lead, overlap = false, full = false } = Astro.props;
+---
+
+<section class:list={["page-hero on-dark", { "page-hero--overlap": overlap, "page-hero--full": full }]} aria-labelledby="page-title">
+  <div class="bg-glow"></div><div class="bg-grid"></div>
+  <TraceMark />
+  <div class="container">
+    <slot name="before" />
+    <p class="eyebrow" data-intro style="--i:0">{eyebrow}</p>
+    <h1 id="page-title" data-intro style="--i:1">{title}</h1>
+    {lead && <p class="lead" data-intro style="--i:2">{lead}</p>}
+    <div data-intro style="--i:3"><slot /></div>
+  </div>
+  {full && (
+    <a class="scroll-cue" href="#contenido">
+      <span>Desliza</span>
+      <span class="scroll-cue__line" aria-hidden="true"></span>
+    </a>
+  )}
+</section>

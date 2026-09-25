@@ -1,0 +1,36 @@
+---
+import Icon from "./Icon.astro";
+import { NAV, SITE } from "../data/site";
+
+interface Props {
+  active?: string;
+}
+const { active } = Astro.props;
+---
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="brand" href="/"><img src="/img/logo-light.svg" alt="TraceIT — Inicio" width="148" height="34" /></a>
+    <nav class="nav" aria-label="Principal">
+      {NAV.map((item) => (
+        <a class="nav__link" href={item.href} aria-current={item.id === active ? "page" : undefined}>{item.label}</a>
+      ))}
+      <a class="btn btn--primary btn--sm" href="/contacto/" aria-current={active === "contacto" ? "page" : undefined}>Hablemos <Icon name="arrow-right" /></a>
+    </nav>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <nav aria-label="Menú móvil">
+    <a class="mobile-menu__link" href="/" style="--i:0">Inicio <Icon name="arrow-right" /></a>
+    {NAV.map((item, i) => (
+      <a class="mobile-menu__link" href={item.href} style={`--i:${i + 1}`} aria-current={item.id === active ? "page" : undefined}>{item.label} <Icon name="arrow-right" /></a>
+    ))}
+    <a class="mobile-menu__link" href="/contacto/" style={`--i:${NAV.length + 1}`} aria-current={active === "contacto" ? "page" : undefined}>Contacto <Icon name="arrow-right" /></a>
+  </nav>
+  <div class="mobile-menu__foot">
+    <a class="btn btn--primary" href="/contacto/">Cuéntanos tu proyecto <Icon name="arrow-right" /></a>
+    <a class="btn btn--ghost" href={`mailto:${SITE.email}`}><Icon name="mail" /> {SITE.email}</a>
+  </div>
+</div>

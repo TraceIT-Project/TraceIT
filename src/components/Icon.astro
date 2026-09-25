@@ -1,0 +1,37 @@
+---
+// Icono SVG en línea. Lucide para iconos de interfaz y Simple Icons / Devicon / SVG Logos para marcas (brand).
+// Los logos "raw" conservan sus colores oficiales en lugar de tomar el color del texto.
+import icons from "../data/icons.json";
+
+interface Props {
+  name: string;
+  brand?: boolean;
+  class?: string;
+  label?: string;
+}
+
+type IconData = { vb: string; inner: string; stroke: boolean; raw?: boolean };
+
+const { name, brand = false, class: className, label } = Astro.props;
+const key = `${brand ? "t" : "i"}-${name}`;
+const icon = (icons as Record<string, IconData>)[key];
+if (!icon) throw new Error(`Icono no encontrado: ${key}`);
+
+// IDs únicos por instancia para que degradados y máscaras no choquen si el logo se repite en la página
+let inner = icon.inner;
+if (inner.includes('id="')) {
+  const uid = Math.random().toString(36).slice(2, 8);
+  inner = inner.replace(/id="([^"]+)"/g, `id="$1-${uid}"`).replace(/(url\(#|href="#)([^")]+)/g, `$1$2-${uid}`);
+}
+const baseClass = brand ? (icon.raw ? "tlogo tlogo--raw" : "tlogo") : "icon";
+---
+
+<svg
+  class={className ? `${baseClass} ${className}` : baseClass}
+  viewBox={icon.vb}
+  aria-hidden={label ? undefined : "true"}
+  role={label ? "img" : undefined}
+  aria-label={label}
+  focusable="false"
+  set:html={inner}
+></svg>

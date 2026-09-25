@@ -1,0 +1,67 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import ProcessSteps from "../components/ProcessSteps.astro";
+import Icon from "../components/Icon.astro";
+import planificacion from "../assets/photos/planificacion-muro.jpg";
+
+const deliverables = [
+  ["receipt", "Propuesta y presupuesto cerrado", "Alcance, plan por fases y precio por escrito antes de empezar. Sin sorpresas en la factura."],
+  ["pen-tool", "Prototipo navegable", "Las pantallas y los flujos principales, para validarlos con tu equipo antes de programar."],
+  ["repeat", "Entregas a tu medida", "Acordamos contigo el ritmo de entregas. En cada una pruebas lo construido en un entorno de pruebas."],
+  ["key-round", "Código y documentación", "Al terminar recibes el código fuente, la documentación y todos los accesos. Es tuyo."],
+  ["users", "Formación para tu equipo", "Te ayudamos a poner el software en marcha para que tu equipo lo use desde el primer día."],
+  ["life-buoy", "Mantenimiento y evolución", "Actualizaciones de seguridad, copias de seguridad, soporte y mejoras, también con bolsa de horas."],
+];
+---
+
+<Base
+  title="Cómo trabajamos · Proceso de desarrollo de software a medida · TraceIT"
+  description="Así trabajamos en TraceIT: primera reunión gratuita, propuesta con presupuesto cerrado por fases, prototipo navegable, entregas a tu medida y mantenimiento después del lanzamiento."
+  active="proceso"
+>
+  <PageHero
+    full
+    eyebrow="Cómo trabajamos"
+    title="Un proceso claro, de la primera idea a producción"
+    lead="Sabes en todo momento qué estamos haciendo, cuánto cuesta y qué vas a recibir. Sin cajas negras ni sorpresas."
+  />
+
+  <section class="section on-dark section--divider" id="contenido" aria-labelledby="pasos-title">
+    <div class="container process">
+      <div class="sticky-head process__aside" data-reveal>
+        <p class="eyebrow">Paso a paso</p>
+        <h2 class="h2" id="pasos-title">De la primera reunión al software funcionando</h2>
+        <p class="lead">Cada proyecto es distinto, pero la forma de trabajar es siempre la misma: por fases, con decisiones compartidas y resultados que puedes ver desde el principio.</p>
+        <figure class="photo-frame">
+          <Image src={planificacion} alt="Mano organizando fichas y diagramas de un proyecto en una pared" widths={[480, 720, 960, 1400]} sizes="(max-width: 960px) calc(100vw - 40px), (max-width: 1340px) 38vw, 480px" quality={72} />
+          <figcaption class="photo-caption"><Icon name="pen-tool" /> Validas cada pantalla con tu equipo antes de programar una sola línea.</figcaption>
+        </figure>
+      </div>
+      <ProcessSteps />
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="recibes-title">
+    <div class="container">
+      <div class="sec-head sec-head--split" data-reveal>
+        <p class="eyebrow">Qué recibes</p>
+        <h2 class="h2" id="recibes-title">Lo que tienes en cada proyecto</h2>
+        <div class="sec-head__side">
+          <p class="lead">Da igual el tamaño del proyecto: estas son las piezas que siempre te llevas.</p>
+          <a class="link-arrow" href="/servicios/">Ver servicios y formas de colaborar <Icon name="arrow-right" /></a>
+        </div>
+      </div>
+      <div class="bento" data-stagger>
+        {deliverables.map(([icon, title, text]) => (
+          <article class="card span-2 spot">
+            <span class="icon-box"><Icon name={icon} /></span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

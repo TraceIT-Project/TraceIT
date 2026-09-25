@@ -1,0 +1,130 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import { SITE, PHONE_TEXT } from "../data/site";
+
+const needs = [
+  "Nuevo software a medida",
+  "Mejorar un software existente",
+  "App móvil",
+  "Intranet o portal",
+  "Dashboard o informes",
+  "Integración o automatización",
+  "Consultoría o auditoría",
+  "Mantenimiento",
+];
+---
+
+<Base
+  title="Contacto · Cuéntanos tu proyecto · TraceIT"
+  description="Cuéntanos tu proyecto de software a medida. Te respondemos en menos de 24 horas y la primera reunión es gratuita y sin compromiso."
+  active="contacto"
+  cta={false}
+>
+  <PageHero
+    eyebrow="Contacto"
+    title="Cuéntanos tu proyecto"
+    lead="Rellena el formulario y te respondemos en menos de 24 horas. La primera reunión es gratuita y sin compromiso."
+    overlap
+  />
+
+  <section class="section section--tight-top" aria-label="Formulario de contacto">
+    <div class="container contact">
+      <div class="panel" data-reveal>
+        <form
+          class="form"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          novalidate
+          data-contact-form
+          data-fallback-email={SITE.email}
+        >
+          <input type="hidden" name="access_key" value={SITE.web3formsKey} />
+          <input type="hidden" name="subject" value="Nuevo contacto desde traceit.es" />
+          <input type="hidden" name="from_name" value="Web TraceIT" />
+          <input type="checkbox" name="botcheck" hidden />
+
+          <h2>Háblanos de tu proyecto</h2>
+          <p class="form__intro">Cuanto más nos cuentes, mejor podremos ayudarte. Los campos marcados como opcionales puedes dejarlos en blanco.</p>
+
+          <fieldset>
+            <legend>¿Qué necesitas? <span class="opt">(puedes marcar varias opciones)</span></legend>
+            <div class="choices">
+              {needs.map((n) => (
+                <label class="choice"><input type="checkbox" name="Necesidad" value={n} /><span>{n}</span></label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div class="fields">
+            <div class="field">
+              <label for="f-name">Nombre</label>
+              <input class="input" id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name" />
+              <p class="field__error" id="e-name"><Icon name="circle-alert" /><span></span></p>
+            </div>
+            <div class="field">
+              <label for="f-company">Empresa <span class="opt">(opcional)</span></label>
+              <input class="input" id="f-company" name="Empresa" type="text" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input class="input" id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email" />
+              <p class="field__error" id="e-email"><Icon name="circle-alert" /><span></span></p>
+            </div>
+            <div class="field">
+              <label for="f-phone">Teléfono <span class="opt">(opcional)</span></label>
+              <input class="input" id="f-phone" name="Teléfono" type="tel" autocomplete="tel" />
+            </div>
+            <div class="field field--full">
+              <label for="f-message">Cuéntanos tu proyecto</label>
+              <textarea class="input" id="f-message" name="message" rows="6" required aria-describedby="e-message" placeholder="A qué se dedica tu empresa, qué problema queréis resolver y, si lo tenéis, qué herramientas usáis hoy."></textarea>
+              <p class="field__error" id="e-message"><Icon name="circle-alert" /><span></span></p>
+            </div>
+          </div>
+
+          <div class="consent">
+            <input id="f-consent" name="consentimiento" type="checkbox" required aria-describedby="e-consent" />
+            <div>
+              <label for="f-consent">He leído y acepto la <a href="/privacidad/">política de privacidad</a>.</label>
+              <p class="field__error" id="e-consent"><Icon name="circle-alert" /><span></span></p>
+            </div>
+          </div>
+          <p class="form__legal">
+            <strong>Responsable:</strong> {SITE.legal.razonSocial}. <strong>Finalidad:</strong> responder a tu solicitud.
+            <strong>Legitimación:</strong> tu consentimiento. <strong>Destinatarios:</strong> no se ceden datos a terceros, salvo obligación legal y el proveedor del servicio de envío de formularios.
+            <strong>Derechos:</strong> acceso, rectificación, supresión y otros, como se explica en la <a href="/privacidad/">política de privacidad</a>.
+          </p>
+
+          <div class="form__actions">
+            <button class="btn btn--primary" type="submit">Enviar mensaje <Icon name="send" /></button>
+            <p class="form__note"><Icon name="clock" /> Respondemos en menos de 24 h </p>
+          </div>
+          <p class="form__status" data-status role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="form-success" data-form-success hidden>
+          <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" pathLength="1"></circle><path d="M15 27l7 7 15-15" pathLength="1"></path></svg>
+          <h2 tabindex="-1">¡Mensaje enviado!</h2>
+          <p>Gracias por escribirnos. Te responderemos en menos de 24 horas para concertar la primera reunión.</p>
+          <a class="btn btn--outline" href="/">Volver al inicio</a>
+        </div>
+      </div>
+
+      <aside class="panel" data-reveal style="--i:1">
+        <h2>Qué pasa después</h2>
+        <ol class="next-steps">
+          <li><strong>Te respondemos en menos de 24 h</strong>Revisamos tu mensaje y te proponemos una fecha para hablar.</li>
+          <li><strong>Reunión inicial gratuita</strong>Nos cuentas tu caso con calma; nosotros escuchamos y preguntamos.</li>
+          <li><strong>Propuesta y presupuesto cerrado</strong>Te enviamos el alcance, el plan por fases y el precio.</li>
+        </ol>
+        <div class="direct">
+          <a href={`mailto:${SITE.email}`}><Icon name="mail" /> {SITE.email}</a>
+          <a href={`tel:${SITE.phoneHref}`}><Icon name="phone" /> {PHONE_TEXT}</a>
+          <a href={SITE.linkedin} target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
+          <p><Icon name="map-pin" /> Málaga · En remoto en España y Latinoamérica</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>

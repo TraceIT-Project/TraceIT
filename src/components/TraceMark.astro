@@ -1,0 +1,10 @@
+---
+// Símbolo de TraceIT dibujado a línea, con un destello que recorre su contorno.
+// El degradado #trace-grad se define una sola vez en el layout.
+import paths from "../data/mark-paths.json";
+---
+
+<svg class="trace-mark" viewBox="-4 -4 329 268" aria-hidden="true" focusable="false">
+  {paths.map((d) => <path class="base" pathLength="1" d={d} />)}
+  {paths.map((d) => <path class="comet" pathLength="1" d={d} />)}
+</svg>

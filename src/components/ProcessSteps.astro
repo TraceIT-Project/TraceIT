@@ -1,0 +1,46 @@
+---
+// Pasos del proceso con la línea que se "traza" al hacer scroll.
+import Icon from "./Icon.astro";
+
+const steps = [
+  {
+    title: "Escuchamos",
+    text: "Nos cuentas cómo trabaja tu empresa, qué problema quieres resolver y qué significa el éxito para ti. La primera reunión es gratuita y sin compromiso.",
+    chips: [["messages-square", "Reunión inicial"], ["circle-check", "Sin coste"]],
+  },
+  {
+    title: "Analizamos y proponemos",
+    text: "Estudiamos tus procesos, datos y sistemas actuales. Te entregamos una propuesta con el alcance, el plan por fases y un presupuesto cerrado.",
+    chips: [["file-text", "Propuesta por escrito"], ["receipt", "Presupuesto cerrado"]],
+  },
+  {
+    title: "Diseñamos",
+    text: "Antes de programar, creamos un prototipo navegable de las pantallas. Tu equipo lo prueba y lo ajustamos juntos hasta que encaja.",
+    chips: [["pen-tool", "Prototipo navegable"], ["users", "Validado con tu equipo"]],
+  },
+  {
+    title: "Desarrollamos",
+    text: "Construimos el software por entregas parciales, con el ritmo que acordemos contigo. En cada una te enseñamos lo construido y puedes probarlo en un entorno de pruebas.",
+    chips: [["repeat", "Entregas a tu medida"], ["eye", "Avances visibles"]],
+  },
+  {
+    title: "Lanzamos y evolucionamos",
+    text: "Ponemos el software en marcha, migramos los datos y formamos a tu equipo. Después, lo mantenemos y seguimos mejorándolo contigo.",
+    chips: [["rocket", "Puesta en marcha"], ["life-buoy", "Mantenimiento"]],
+  },
+];
+---
+
+<ol class="steps" data-steps>
+  <li class="steps__progress" aria-hidden="true"></li>
+  {steps.map((step, i) => (
+    <li class="step" data-reveal>
+      <span class="step__node" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+      <h3>{step.title}</h3>
+      <p>{step.text}</p>
+      <ul class="chips">
+        {step.chips.map(([icon, label]) => <li class="chip"><Icon name={icon} /> {label}</li>)}
+      </ul>
+    </li>
+  ))}
+</ol>

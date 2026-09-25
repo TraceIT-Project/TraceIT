@@ -1,0 +1,160 @@
+---
+// Explorador de sectores: pestañas accesibles (teclado y lector de pantalla).
+// Sin JavaScript se muestran todos los sectores uno debajo de otro.
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import logistica from "../assets/photos/sector-logistica.jpg";
+import industria from "../assets/photos/sector-industria.jpg";
+import salud from "../assets/photos/sector-salud.jpg";
+import construccion from "../assets/photos/sector-construccion.jpg";
+import servicios from "../assets/photos/sector-servicios.jpg";
+import comercio from "../assets/photos/sector-comercio.jpg";
+import hosteleria from "../assets/photos/sector-hosteleria.jpg";
+import educacion from "../assets/photos/sector-educacion.jpg";
+
+interface Props {
+  num?: string;
+}
+const { num } = Astro.props;
+
+// project: id del proyecto relacionado en src/content/proyectos (opcional)
+// focus: parte de la foto que se mantiene visible al recortarla (object-position)
+const sectors = [
+  {
+    id: "logistica",
+    name: "Logística y distribución",
+    icon: "truck",
+    photo: logistica,
+    alt: "Vista aérea de camiones aparcados en un centro logístico",
+    text: "Visibilidad en tiempo real de pedidos, almacenes y rutas, con menos llamadas y menos hojas de cálculo.",
+    items: ["Seguimiento de pedidos y envíos", "Gestión de almacenes e inventario", "Planificación de rutas y flotas", "Integración con ERP y transportistas"],
+    project: "logistica",
+  },
+  {
+    id: "industria",
+    name: "Industria y fabricación",
+    icon: "factory",
+    photo: industria,
+    alt: "Brazos robóticos trabajando en una línea de fabricación",
+    text: "Del papel al dato en planta: producción, calidad y trazabilidad conectadas en un mismo sistema.",
+    items: ["Órdenes de fabricación y partes digitales", "Trazabilidad por lote", "Indicadores de eficiencia de planta", "Mantenimiento de maquinaria"],
+    project: "industria",
+  },
+  {
+    id: "salud",
+    name: "Salud y clínicas",
+    icon: "stethoscope",
+    photo: salud,
+    alt: "Doctora explicando imágenes médicas en pantalla a un compañero con una tableta en la mano",
+    focus: "66% 40%",
+    text: "Herramientas para que el equipo dedique su tiempo a los pacientes y no a la gestión.",
+    items: ["Agenda y citas para varios centros", "Recordatorios automáticos", "Fichas de pacientes con control de accesos", "Coordinación entre centros y profesionales"],
+    project: "clinicas",
+  },
+  {
+    id: "construccion",
+    name: "Construcción e inmobiliaria",
+    icon: "hard-hat",
+    photo: construccion,
+    alt: "Vista aérea de operarios con chaleco naranja trabajando en una obra",
+    text: "Control de obras, costes y documentación, desde la oficina y a pie de obra.",
+    items: ["Partes de trabajo desde el móvil", "Control de costes por obra", "Gestión documental de proyectos", "Gestión de inmuebles y alquileres"],
+    project: "construccion",
+  },
+  {
+    id: "servicios-profesionales",
+    name: "Servicios profesionales",
+    icon: "briefcase",
+    photo: servicios,
+    alt: "Dos personas trabajando con portátiles y documentos",
+    text: "Asesorías, gestorías y despachos: menos papeleo y más tiempo para tus clientes.",
+    items: ["Portales para clientes", "Automatización de documentación", "Gestión de expedientes y plazos", "Integración con el programa contable"],
+    project: "asesoria",
+  },
+  {
+    id: "comercio",
+    name: "Comercio y retail",
+    icon: "store",
+    photo: comercio,
+    alt: "Empleada atendiendo a una clienta en el mostrador con un terminal de venta en tableta",
+    focus: "64% 45%",
+    text: "Stock, ventas y clientes conectados entre la tienda física y la tienda online.",
+    items: ["Sincronización de stock con la tienda online", "Cuadros de mando de ventas", "Programas de fidelización", "Integración con TPV y ERP"],
+    project: "comercial",
+  },
+  {
+    id: "hosteleria",
+    name: "Hostelería y turismo",
+    icon: "hotel",
+    photo: hosteleria,
+    alt: "Hotel con piscina y palmeras al atardecer",
+    text: "Operaciones más ágiles para hoteles, alojamientos turísticos y restaurantes.",
+    items: ["Gestión de reservas y disponibilidad", "Operaciones y limpieza de alojamientos", "Pedidos y comandas", "Informes de ocupación y ventas"],
+  },
+  {
+    id: "educacion",
+    name: "Educación y formación",
+    icon: "graduation-cap",
+    photo: educacion,
+    alt: "Sesión de formación en un aula con proyector",
+    text: "Plataformas para gestionar alumnos, cursos y centros de formación.",
+    items: ["Plataformas de formación online", "Gestión de alumnos y matrículas", "Seguimiento del progreso y certificados", "Comunicación con alumnos y familias"],
+  },
+];
+---
+
+<section class="section section--soft" id="sectores" aria-labelledby="sectores-title">
+  <div class="container">
+    <div class="sec-head sec-head--split" data-reveal>
+      <p class="eyebrow">{num && <span class="num">{num}</span>} Sectores</p>
+      <h2 class="h2" id="sectores-title">Software pensado para tu sector</h2>
+      <div class="sec-head__side">
+        <p class="lead">Cada sector tiene sus procesos, sus normas y sus herramientas. Diseñamos el software alrededor de los tuyos.</p>
+      </div>
+    </div>
+
+    <div class="sectors" data-tabs>
+      <div class="sectors__tabs" role="tablist" aria-label="Sectores" aria-orientation="vertical" data-stagger>
+        {sectors.map((s, i) => (
+          <button
+            class="sector-tab"
+            type="button"
+            role="tab"
+            id={`tab-${s.id}`}
+            aria-controls={`panel-${s.id}`}
+            aria-selected={i === 0 ? "true" : "false"}
+            tabindex={i === 0 ? 0 : -1}
+          >
+            <span class="sector-tab__icon"><Icon name={s.icon} /></span>
+            <span class="sector-tab__name">{s.name}</span>
+            <Icon name="arrow-right" class="sector-tab__arrow" />
+          </button>
+        ))}
+      </div>
+
+      <div class="sectors__panels" data-reveal>
+        {sectors.map((s, i) => (
+          <div class:list={["sector-panel", { "is-active": i === 0 }]} role="tabpanel" id={`panel-${s.id}`} aria-labelledby={`tab-${s.id}`} tabindex="0">
+            <div class="sector-panel__media">
+              <Image src={s.photo} alt={s.alt} widths={[640, 960, 1280]} sizes="(max-width: 960px) calc(100vw - 40px), 820px" quality={70} style={`object-position: ${s.focus ?? "50% 50%"}`} />
+              <span class="sector-panel__icon"><Icon name={s.icon} /></span>
+            </div>
+            <div class="sector-panel__body">
+              <h3>{s.name}</h3>
+              <p>{s.text}</p>
+              <p class="sector-panel__label">Qué podemos construir</p>
+              <ul class="checklist">
+                {s.items.map((item) => <li><Icon name="check" /> {item}</li>)}
+              </ul>
+              {s.project ? (
+                <a class="link-arrow" href={`/proyectos/${s.project}/`}>Ver un proyecto de este sector <Icon name="arrow-right" /></a>
+              ) : (
+                <a class="link-arrow" href="/contacto/">Cuéntanos tu caso <Icon name="arrow-right" /></a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

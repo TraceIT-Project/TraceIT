@@ -1,0 +1,54 @@
+---
+import Icon from "./Icon.astro";
+import { SITE, PHONE_TEXT, SERVICE_LINKS } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="/img/logo-light.svg" alt="TraceIT" width="157" height="36" loading="lazy" />
+        <p>Consultora de software especializada en desarrollo a medida: aplicaciones web y móviles, intranets, dashboards e integraciones para empresas. Desde Málaga, en remoto para España y Latinoamérica.</p>
+        <a class="btn btn--ghost btn--sm" href="/contacto/">Cuéntanos tu proyecto <Icon name="arrow-right" /></a>
+      </div>
+      <div class="footer__col">
+        <h2>Servicios</h2>
+        <ul>
+          {SERVICE_LINKS.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Empresa</h2>
+        <ul>
+          <li><a href="/proyectos/">Proyectos</a></li>
+          <li><a href="/como-trabajamos/">Cómo trabajamos</a></li>
+          <li><a href="/nosotros/">Nosotros</a></li>
+          <li><a href="/#faq">Preguntas frecuentes</a></li>
+          <li><a href="/contacto/">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h2>Contacto</h2>
+        <ul>
+          <li><a href={`mailto:${SITE.email}`}><Icon name="mail" /> {SITE.email}</a></li>
+          <li><a href={`tel:${SITE.phoneHref}`}><Icon name="phone" /> {PHONE_TEXT}</a></li>
+          <li><span><Icon name="map-pin" /> Málaga, España</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span data-year>{year}</span> TraceIT · Desarrollo de software a medida</p>
+      <nav class="footer__legal" aria-label="Legal">
+        <a href="/aviso-legal/">Aviso legal</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/cookies/">Cookies</a>
+      </nav>
+      <div class="socials">
+        <a href={SITE.linkedin} target="_blank" rel="noopener" aria-label="TraceIT en LinkedIn"><Icon name="linkedin" /></a>
+        <a href={`mailto:${SITE.email}`} aria-label="Enviar un email a TraceIT"><Icon name="mail" /></a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import Icon from "../../components/Icon.astro";
+import { PROJECT_CATEGORIES } from "../../data/site";
+
+const projects = (await getCollection("proyectos")).sort((a, b) => a.data.order - b.data.order);
+
+// Solo se muestran los filtros de categorías que tienen algún proyecto
+const used = new Set(projects.flatMap((p) => p.data.categories));
+const filters = Object.entries(PROJECT_CATEGORIES).filter(([key]) => used.has(key as keyof typeof PROJECT_CATEGORIES));
+---
+
+<Base
+  title="Proyectos de software a medida · TraceIT"
+  description="Intranets, dashboards, aplicaciones web y móviles, integraciones y modernización de software para empresas de logística, industria, salud, construcción y más."
+  active="proyectos"
+>
+  <PageHero
+    full
+    eyebrow="Proyectos"
+    title="Software que ya está funcionando"
+    lead="Proyectos para empresas de distintos sectores: el reto de cada una, cómo lo resolvimos y los resultados que consiguió."
+  />
+
+  <section class="section section--tight-top" id="contenido" aria-label="Listado de proyectos">
+    <div class="container">
+      <div class="filters" data-filter role="group" aria-label="Filtrar proyectos por tipo">
+        <button class="filter" type="button" data-value="todos" aria-pressed="true">Todos</button>
+        {filters.map(([key, label]) => <button class="filter" type="button" data-value={key} aria-pressed="false">{label}</button>)}
+      </div>
+      <p class="sr-only" aria-live="polite" data-filter-status></p>
+      <div class="proj-grid">
+        {projects.map((project, i) => (
+          <ProjectCard project={project} index={i % 2} heading="h2" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1340px) 48vw, 610px" priority={i === 0} />
+        ))}
+      </div>
+      <p class="nda-note"><Icon name="lock" /> Trabajamos con acuerdos de confidencialidad. Si quieres ver un proyecto en detalle, te lo enseñamos en una reunión.</p>
+    </div>
+  </section>
+</Base>
