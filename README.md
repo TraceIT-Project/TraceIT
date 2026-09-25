@@ -103,7 +103,7 @@ Opción **hosting tradicional** (FTP): ejecuta `npm run build` y sube el conteni
 
 ## Pendiente antes de publicar
 
-- [ ] Teléfono real (ahora `987 654 321`, provisional) y URL de LinkedIn (`src/data/site.ts`).
+- [ ] Teléfono real (ahora `987 654 321`, provisional) en `src/data/site.ts`.
 - [ ] Datos legales reales: razón social, NIF, domicilio y datos registrales (`src/data/site.ts`).
 - [ ] Clave de Web3Forms (ver arriba).
 - [ ] Sustituir los 6 proyectos de ejemplo por proyectos reales (`src/content/proyectos/`).
