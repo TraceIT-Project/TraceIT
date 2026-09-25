@@ -28,19 +28,19 @@
 }
 
 :root {
-  /* Colores de marca (medidos sobre el logo) */
-  --navy: #15355b;
-  --teal: #0bab9a;
+  /* Colores de marca (los del logo vectorial) */
+  --navy: #163458;
+  --teal: #0aaa98;
 
   /* Escala derivada */
   --navy-950: #071424;
   --navy-900: #0b1d33;
   --navy-850: #0f2640;
-  --navy-800: #15355b;
+  --navy-800: #163458;
   --navy-700: #1f4b7c;
   --teal-300: #6fe3d3;
   --teal-400: #2fd0bc;
-  --teal-500: #0bab9a;
+  --teal-500: #0aaa98;
   --teal-600: #08897b;
   --teal-700: #067064;
   --teal-50: #e9f8f5;

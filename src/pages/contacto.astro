@@ -91,14 +91,14 @@ const needs = [
             </div>
           </div>
           <p class="form__legal">
-            <strong>Responsable:</strong> {SITE.legal.razonSocial}. <strong>Finalidad:</strong> responder a tu solicitud.
+            <strong>Responsable:</strong> {SITE.legal.razonSocial.replace(/\.?$/, ".")} <strong>Finalidad:</strong> responder a tu solicitud.
             <strong>Legitimación:</strong> tu consentimiento. <strong>Destinatarios:</strong> no se ceden datos a terceros, salvo obligación legal y el proveedor del servicio de envío de formularios.
             <strong>Derechos:</strong> acceso, rectificación, supresión y otros, como se explica en la <a href="/privacidad/">política de privacidad</a>.
           </p>
 
           <div class="form__actions">
             <button class="btn btn--primary" type="submit">Enviar mensaje <Icon name="send" /></button>
-            <p class="form__note"><Icon name="clock" /> Respondemos en menos de 24 h </p>
+            <p class="form__note"><Icon name="clock" /> Respondemos en menos de 24 horas</p>
           </div>
           <p class="form__status" data-status role="status" aria-live="polite"></p>
         </form>
@@ -114,7 +114,7 @@ const needs = [
       <aside class="panel" data-reveal style="--i:1">
         <h2>Qué pasa después</h2>
         <ol class="next-steps">
-          <li><strong>Te respondemos en menos de 24 h</strong>Revisamos tu mensaje y te proponemos una fecha para hablar.</li>
+          <li><strong>Te respondemos en menos de 24 horas</strong>Revisamos tu mensaje y te proponemos una fecha para hablar.</li>
           <li><strong>Reunión inicial gratuita</strong>Nos cuentas tu caso con calma; nosotros escuchamos y preguntamos.</li>
           <li><strong>Propuesta y presupuesto cerrado</strong>Te enviamos el alcance, el plan por fases y el precio.</li>
         </ol>

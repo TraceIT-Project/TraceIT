@@ -5,8 +5,8 @@ export const SITE = {
   name: "TraceIT",
   url: "https://traceit.es",
   email: "traceitagency@gmail.com",
-  phone: "652 30 85 36", // PROVISIONAL
-  phoneHref: "+34652308536", // PROVISIONAL (mismo número con prefijo +34, sin espacios)
+  phone: "987 654 321", // PROVISIONAL
+  phoneHref: "+34987654321", // PROVISIONAL (mismo número con prefijo +34, sin espacios)
   linkedin: "https://www.linkedin.com/company/traceit", // PROVISIONAL
   // Clave de acceso de https://web3forms.com. Mientras empiece por "TU_",
   // el formulario abre el programa de correo del usuario como alternativa.
@@ -20,7 +20,7 @@ export const SITE = {
 };
 
 // Teléfono para mostrar: espacios de no separación para que el número nunca se parta en dos líneas
-export const PHONE_TEXT = SITE.phone.replaceAll(" ", " ");
+export const PHONE_TEXT = SITE.phone.replaceAll(" ", "\u00A0");
 
 export const NAV = [
   { id: "servicios", href: "/servicios/", label: "Servicios" },
