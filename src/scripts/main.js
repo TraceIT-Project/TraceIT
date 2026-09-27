@@ -198,7 +198,7 @@
       const tab = e.target.closest('[role="tab"]');
       if (!tab) return;
       select(tab, false);
-      // En móvil la ficha va debajo de los sectores: si queda fuera de la vista, se desplaza hasta ella
+      // En móvil la ficha queda debajo de los sectores: si no se ve, se desplaza hasta ella
       const panel = document.getElementById(tab.getAttribute("aria-controls"));
       if (panel.getBoundingClientRect().top > window.innerHeight * 0.75) {
         panel.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });

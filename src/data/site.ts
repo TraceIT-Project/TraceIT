@@ -19,7 +19,7 @@ export const SITE = {
   },
 };
 
-// Teléfono para mostrar: espacios de no separación para que el número nunca se parta en dos líneas
+// Espacios de no separación: el número no se parte en dos líneas
 export const PHONE_TEXT = SITE.phone.replaceAll(" ", "\u00A0");
 
 export const NAV = [
