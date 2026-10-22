@@ -3,6 +3,12 @@
   "$schema": "https://unpkg.com/wrangler@4.152.0/config-schema.json",
   "name": "traceit",
   "compatibility_date": "2026-10-12",
+  // Dirección de pruebas: https://traceit.traceit-web.workers.dev
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "traceit.es", "custom_domain": true },
+    { "pattern": "www.traceit.es", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./dist",
     // Las rutas que no existen muestran la página 404 propia
