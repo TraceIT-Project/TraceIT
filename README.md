@@ -94,10 +94,10 @@ Mientras la clave empiece por `TU_`, el formulario abre el programa de correo de
 
 ## Publicar la web
 
-Opción recomendada, **Netlify, Vercel o Cloudflare Pages** (gratis para una web así): conecta el repositorio y configura:
+La web está publicada en **Cloudflare** (Worker `traceit`, solo archivos estáticos, configurado en `wrangler.jsonc`) con el dominio `traceit.es`.
 
-- Comando de compilación: `npm run build`
-- Carpeta de publicación: `dist`
+- **Automático:** cada `git push` a `main` compila y publica la web con GitHub Actions (`.github/workflows/deploy.yml`). Necesita el secreto `CLOUDFLARE_API_TOKEN` en el repositorio (token de Cloudflare con la plantilla "Edit Cloudflare Workers").
+- **Manual:** `npm run build` y después `npx wrangler deploy` (con la sesión de Cloudflare iniciada mediante `npx wrangler login`).
 
 Opción **hosting tradicional** (FTP): ejecuta `npm run build` y sube el contenido de `dist/` a la raíz del dominio. En servidores Apache, añade un `.htaccess` con `ErrorDocument 404 /404.html` para usar la página de error propia.
 

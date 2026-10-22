@@ -1,0 +1,11 @@
+// Publicación en Cloudflare: solo sirve los archivos estáticos de dist/ (sin servidor)
+{
+  "$schema": "https://unpkg.com/wrangler@4.152.0/config-schema.json",
+  "name": "traceit",
+  "compatibility_date": "2026-10-12",
+  "assets": {
+    "directory": "./dist",
+    // Las rutas que no existen muestran la página 404 propia
+    "not_found_handling": "404-page"
+  }
+}
