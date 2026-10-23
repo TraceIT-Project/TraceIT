@@ -6,7 +6,7 @@ Páginas: Inicio, Servicios, Proyectos (listado con filtros y una página por pr
 
 ## Requisitos
 
-- Node.js 22.12 o superior
+- Node.js 22.23.4 o superior (GitHub Actions usa la 24)
 
 ## Comandos
 
@@ -21,7 +21,7 @@ Páginas: Inicio, Servicios, Proyectos (listado con filtros y una página por pr
 
 ```text
 brand/                  Kit de marca en vectorial (no se publica en la web)
-public/                 Archivos servidos tal cual: logos, favicon, fuentes, robots.txt
+public/                 Archivos servidos tal cual: logos, favicon, fuentes, robots.txt, _headers
 src/
   assets/photos/        Fotos originales (Astro genera las versiones WebP)
   components/           Piezas reutilizables (cabecera, pie, tarjetas, sectores…)
@@ -70,7 +70,7 @@ Cada sector de `src/components/Sectors.astro` tiene foto, textos, un proyecto re
 
 ### Tecnologías e iconos
 
-Cada tecnología de `TECH` indica su nombre, su icono (`icon`), si es un logotipo de marca (`brand`) y su color oficial (`color`), que se usa en las baldosas. Si el número de tecnologías no completa la última fila de 3, se añade sola una baldosa de contacto.
+Cada tecnología de `TECH` indica su nombre, su logotipo (`icon`) y su color oficial (`color`), que se usa en las baldosas. Si el número de tecnologías no completa la última fila de 3, se añade sola una baldosa de contacto.
 
 Los iconos están en `src/data/icons.json`: las claves `i-*` son iconos de interfaz de [Lucide](https://lucide.dev) y las `t-*`, logotipos de tecnologías. Para añadir uno, copia el contenido del SVG (lo que va dentro de `<svg>…</svg>`) en una entrada nueva con su `viewBox`. Los logos de un solo color deben ir sin `fill` para que tomen el color de su baldosa.
 
@@ -99,16 +99,20 @@ La web está publicada en **Cloudflare** (Worker `traceit`, solo archivos estát
 - **Automático:** cada `git push` a `main` compila y publica la web con GitHub Actions (`.github/workflows/deploy.yml`). Necesita el secreto `CLOUDFLARE_API_TOKEN` en el repositorio (token de Cloudflare con la plantilla "Edit Cloudflare Workers").
 - **Manual:** `npm run build` y después `npx wrangler deploy` (con la sesión de Cloudflare iniciada mediante `npx wrangler login`).
 
+`public/_headers` añade cabeceras de seguridad a todas las páginas y caché de larga duración a `/_astro/` (archivos con hash) y `/fonts/`.
+
 Opción **hosting tradicional** (FTP): ejecuta `npm run build` y sube el contenido de `dist/` a la raíz del dominio. En servidores Apache, añade un `.htaccess` con `ErrorDocument 404 /404.html` para usar la página de error propia.
 
 ## Pendiente antes de publicar
 
 - [ ] Teléfono real (ahora `987 654 321`, provisional) en `src/data/site.ts`.
-- [ ] Datos legales reales: razón social, NIF, domicilio y datos registrales (`src/data/site.ts`).
+- [ ] Datos legales reales: razón social, NIF y datos registrales (`src/data/site.ts`).
 - [ ] Clave de Web3Forms (ver arriba).
 - [ ] Sustituir los 6 proyectos de ejemplo por proyectos reales (`src/content/proyectos/`).
 - [ ] Revisar con un asesor los textos legales (aviso legal, privacidad, cookies): son una plantilla orientativa.
 - [ ] Revisar los textos de "Nosotros" (misión, significado del nombre y valores son una propuesta).
+- [ ] Email con el dominio propio (p. ej. `hola@traceit.es`, gratis con Cloudflare Email Routing) en lugar de Gmail.
+- [ ] Redirigir `www.traceit.es` a `traceit.es` con una regla de redirección de Cloudflare (ahora las dos direcciones sirven la web).
 - [ ] Si se añade analítica (Google Analytics, etc.), actualizar la política de cookies y añadir un banner de consentimiento.
 
 ## Créditos

@@ -17,7 +17,7 @@ const showMore = items.length % 3 !== 0;
 <ul class="tech-tiles">
   {items.map((t, i) => (
     <li class="tech-tile" data-reveal style={`--c:${t.color};--i:${Math.floor(i / 3)}`}>
-      <span class="tech-tile__logo"><Icon name={t.icon} brand={t.brand} /></span>
+      <span class="tech-tile__logo"><Icon name={t.icon} brand /></span>
       <span class="tech-tile__text">
         <span class="tech-tile__name">{t.name}</span>
         <span class="tech-tile__cat">{t.group}</span>

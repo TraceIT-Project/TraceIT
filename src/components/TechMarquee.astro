@@ -10,7 +10,7 @@ const items = [...TECH.frontend, ...TECH.backend, ...TECH.datos, ...TECH.cloud];
     {[false, true].map((duplicate) => (
       <ul class="marquee__group" aria-hidden={duplicate ? "true" : undefined}>
         {items.map((t) => (
-          <li class="marquee__item"><Icon name={t.icon} brand={t.brand} />{t.name}</li>
+          <li class="marquee__item"><Icon name={t.icon} brand />{t.name}</li>
         ))}
       </ul>
     ))}

@@ -31,7 +31,7 @@ const Heading = heading;
   </div>
   <div class="proj__body">
     <p class="proj__sector">{p.sector}</p>
-    <Heading><a href={`/proyectos/${project.id}/`}>{p.title}</a></Heading>
+    <Heading class="proj__title"><a href={`/proyectos/${project.id}/`}>{p.title}</a></Heading>
     {desc && <p class="proj__desc">{p.summary}</p>}
     <div class="proj__metrics">
       {p.metrics.map((m) => <div><strong>{m.value}</strong><span>{m.label}</span></div>)}

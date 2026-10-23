@@ -23,7 +23,7 @@ const { active } = Astro.props;
 </header>
 <div class="mobile-menu" id="mobile-menu">
   <nav aria-label="Menú móvil">
-    <a class="mobile-menu__link" href="/" style="--i:0">Inicio <Icon name="arrow-right" /></a>
+    <a class="mobile-menu__link" href="/" style="--i:0" aria-current={active === "inicio" ? "page" : undefined}>Inicio <Icon name="arrow-right" /></a>
     {NAV.map((item, i) => (
       <a class="mobile-menu__link" href={item.href} style={`--i:${i + 1}`} aria-current={item.id === active ? "page" : undefined}>{item.label} <Icon name="arrow-right" /></a>
     ))}
