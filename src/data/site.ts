@@ -5,8 +5,8 @@ export const SITE = {
   name: "TraceIT",
   url: "https://traceit.es",
   email: "traceitagency@gmail.com",
-  phone: "652 308 536", // PROVISIONAL
-  phoneHref: "+34652308536", // PROVISIONAL (mismo número con prefijo +34, sin espacios)
+  phone: "+34 640 29 28 13",
+  phoneHref: "+34640292813",
   linkedin: "https://www.linkedin.com/company/traceit-agency/",
   // Clave de acceso de https://web3forms.com. Mientras empiece por "TU_",
   // el formulario abre el programa de correo del usuario como alternativa.
