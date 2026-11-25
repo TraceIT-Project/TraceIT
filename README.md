@@ -92,6 +92,15 @@ Colores de marca: azul `#163458` y turquesa `#0AAA98`.
 
 Mientras la clave empiece por `TU_`, el formulario abre el programa de correo del visitante con el mensaje ya preparado, para que ningún contacto se pierda.
 
+Ajustes recomendados en el panel de Web3Forms:
+
+- **Destinatario:** `info@traceit.es`.
+- **Redirección:** vacía o `https://traceit.es/` (solo se usa si el visitante no tiene JavaScript).
+- **Seguridad:** "Basic" con `traceit.es` y `www.traceit.es` (el formulario deja de funcionar en `localhost`).
+- **Borrado de envíos:** 1 año como máximo, que es lo que promete la política de privacidad.
+
+Si cambias de proveedor de formularios, de alojamiento o de correo, actualiza el apartado "Destinatarios" de `src/pages/privacidad.astro`.
+
 ## Publicar la web
 
 La web está publicada en **Cloudflare** (Worker `traceit`, solo archivos estáticos, configurado en `wrangler.jsonc`) con el dominio `traceit.es`.
@@ -99,18 +108,19 @@ La web está publicada en **Cloudflare** (Worker `traceit`, solo archivos estát
 - **Automático:** cada `git push` a `main` compila y publica la web con GitHub Actions (`.github/workflows/deploy.yml`). Necesita el secreto `CLOUDFLARE_API_TOKEN` en el repositorio (token de Cloudflare con la plantilla "Edit Cloudflare Workers").
 - **Manual:** `npm run build` y después `npx wrangler deploy` (con la sesión de Cloudflare iniciada mediante `npx wrangler login`).
 
-`public/_headers` añade cabeceras de seguridad a todas las páginas y caché de larga duración a `/_astro/` (archivos con hash) y `/fonts/`.
+`public/_headers` añade cabeceras de seguridad a todas las páginas (HTTPS obligatorio con HSTS, política de seguridad de contenido que solo permite enviar el formulario a Web3Forms, bloqueo de iframes) y caché de larga duración a `/_astro/` (archivos con hash) y `/fonts/`. La política de seguridad de contenido solo permite recursos del propio dominio. Si se añade un servicio externo (analítica, chat, vídeos…), hay que añadir su dominio a la directiva correspondiente de `Content-Security-Policy` (`script-src`, `connect-src`, `img-src`, `frame-src`…). El único script en línea, que está en `src/layouts/Base.astro`, está autorizado por su hash en `script-src`: si se cambia, hay que recalcularlo.
 
 Opción **hosting tradicional** (FTP): ejecuta `npm run build` y sube el contenido de `dist/` a la raíz del dominio. En servidores Apache, añade un `.htaccess` con `ErrorDocument 404 /404.html` para usar la página de error propia.
 
 ## Pendiente antes de publicar
 
-- [ ] Datos legales reales: razón social, NIF y datos registrales (`src/data/site.ts`).
-- [ ] Clave de Web3Forms (ver arriba).
+- [ ] Datos legales reales: razón social, NIF, domicilio y datos registrales (`src/data/site.ts`).
+- [ ] Ajustes del panel de Web3Forms (ver "Formulario de contacto").
+- [x] Clave de Web3Forms (ver arriba).
 - [ ] Sustituir los 6 proyectos de ejemplo por proyectos reales (`src/content/proyectos/`).
 - [ ] Revisar con un asesor los textos legales (aviso legal, privacidad, cookies): son una plantilla orientativa.
 - [ ] Revisar los textos de "Nosotros" (misión, significado del nombre y valores son una propuesta).
-- [ ] Email con el dominio propio (p. ej. `hola@traceit.es`, gratis con Cloudflare Email Routing) en lugar de Gmail.
+- [x] Email con el dominio propio (`info@traceit.es`) en lugar de Gmail.
 - [ ] Redirigir `www.traceit.es` a `traceit.es` con una regla de redirección de Cloudflare (ahora las dos direcciones sirven la web).
 - [ ] Si se añade analítica (Google Analytics, etc.), actualizar la política de cookies y añadir un banner de consentimiento.
 

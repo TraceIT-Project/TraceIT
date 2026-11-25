@@ -4,13 +4,13 @@
 export const SITE = {
   name: "TraceIT",
   url: "https://traceit.es",
-  email: "traceitagency@gmail.com",
+  email: "info@traceit.es",
   phone: "+34 640 29 28 13",
   phoneHref: "+34640292813",
   linkedin: "https://www.linkedin.com/company/traceit-agency/",
   // Clave de acceso de https://web3forms.com. Mientras empiece por "TU_",
   // el formulario abre el programa de correo del usuario como alternativa.
-  web3formsKey: "TU_ACCESS_KEY_DE_WEB3FORMS",
+  web3formsKey: "fbda6e1f-7269-4671-a83b-8eb2173e6fbf",
   legal: {
     razonSocial: "TraceIT Software, S.L.", // PROVISIONAL
     cif: "B00000000", // PROVISIONAL
